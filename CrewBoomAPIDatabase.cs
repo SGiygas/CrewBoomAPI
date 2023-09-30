@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace BrcCustomCharactersAPI
+namespace CrewBoomAPI
 {
-    public static class Database
+    public static class CrewBoomAPIDatabase
     {
-        private static bool _hasOverride;
-        private static Guid _nextOverride;
         private static Dictionary<int, Guid> _userReplacements;
 
         public static bool IsInitialized { get; private set; }
@@ -35,8 +33,6 @@ namespace BrcCustomCharactersAPI
         }
         public static void OverrideNextCharacterLoadedWithGuid(Guid guid)
         {
-            _nextOverride = guid;
-
             OnOverride?.Invoke(guid);
         }
     }

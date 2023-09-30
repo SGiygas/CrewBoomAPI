@@ -2,8 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>net46</TargetFramework>
-    <AssemblyName>BrcCustomCharactersAPI</AssemblyName>
-    <Description>API to interact with BrcCustomCharacters</Description>
+    <AssemblyName>CrewBoomAPI</AssemblyName>
+    <Description>API to interact with Crew Boom.</Description>
     <Version>1.0.0</Version>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <LangVersion>latest</LangVersion>
