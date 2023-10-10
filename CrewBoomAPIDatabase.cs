@@ -5,15 +5,15 @@ namespace CrewBoomAPI
 {
     public static class CrewBoomAPIDatabase
     {
-        private static Dictionary<int, Guid> _userReplacements;
+        private static Dictionary<int, Guid> _userCharacters;
 
         public static bool IsInitialized { get; private set; }
-        public static event System.Action OnInitialized;
-        public static event System.Action<Guid> OnOverride;
+        public static event Action OnInitialized;
+        public static event Action<Guid> OnOverride;
 
-        public static void Initialize(Dictionary<int, Guid> userReplacements)
+        public static void Initialize(Dictionary<int, Guid> userCharacters)
         {
-            _userReplacements = userReplacements;
+            _userCharacters = userCharacters;
 
             OnInitialized?.Invoke();
             IsInitialized = true;
@@ -23,9 +23,8 @@ namespace CrewBoomAPI
         {
             guid = Guid.Empty;
 
-            if (_userReplacements.ContainsKey(character))
+            if (_userCharacters.TryGetValue(character, out guid))
             {
-                guid = _userReplacements[character];
                 return true;
             }
 
