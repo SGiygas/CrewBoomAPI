@@ -3,6 +3,18 @@ using System.Collections.Generic;
 
 namespace CrewBoomAPI
 {
+    public class CharacterInfo
+    {
+        public readonly string Name;
+        public readonly string GraffitiName;
+
+        public CharacterInfo(string name, string graffitiName)
+        {
+            Name = name;
+            GraffitiName = graffitiName;
+        }
+    }
+
     public static class CrewBoomAPIDatabase
     {
         private static Dictionary<int, Guid> _userCharacters;
@@ -11,12 +23,20 @@ namespace CrewBoomAPI
         public static event Action OnInitialized;
         public static event Action<Guid> OnOverride;
 
+        public static CharacterInfo PlayerCharacterInfo { get; private set; }
+        public static event Action<CharacterInfo> OnPlayerCharacterInfoChanged;
+
         public static void Initialize(Dictionary<int, Guid> userCharacters)
         {
             _userCharacters = userCharacters;
 
             OnInitialized?.Invoke();
             IsInitialized = true;
+        }
+        public static void UpdatePlayerCharacter(CharacterInfo characterInfo)
+        {
+            PlayerCharacterInfo = characterInfo;
+            OnPlayerCharacterInfoChanged?.Invoke(characterInfo);
         }
 
         public static bool GetUserGuidForCharacter(int character, out Guid guid)
